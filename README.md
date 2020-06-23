@@ -26,11 +26,11 @@ Given some logical predicates **P** and **Q**, and some logical statement involv
 
 (Note that a logical statement that includes implications or equivalences can always be rewritten in terms of the operators above.)
 
-For example, if **P** is true and **Q** is false, The statement "**P** and ~**Q**" is true (where the tilde represents negation). The same statement would be false if **P** was false, for example. 
+For example, if **P** is true and **Q** is false, The statement "**P** and \~**Q**" is true (where the tilde represents negation). The same statement would be false if **P** was false, for example. 
 
 These relationships are normally summarized in a *truth table*. Here's the truth table for the statement above.
 
-**P** | **Q** | **P** and ~**Q**
+**P** | **Q** | **P** and \~**Q**
 ---|---|---
 True | True | False
 True | False | True
@@ -39,7 +39,7 @@ False | False | False
 
 It is common to simply write T and F rather than "True" and "False", and for our purposes we will represent these with 1 and 0, respectively. So for us, the truth table above looks like this:
 
-**P** | **Q** | **P** and ~**Q**
+**P** | **Q** | **P** and \~**Q**
 ---|---|---
 1 | 1 | 0
 1 | 0 | 1
@@ -56,9 +56,9 @@ Also by convention, truth tables are always organized according to some simple r
     + Column n is split into 2^(n-1) pieces corresponding to the groups of rows in which the column to the left has sequences of repeating 1s and 0s. 
     + Within each piece, put 1s in the top half and 0s in the bottom half. 
 
-For example, a truth table for the four-predicate statement "((**P** and **Q**) or ~**R**) and (~**P** or **S**)" looks like this:
+For example, a truth table for the four-predicate statement "((**P** and **Q**) or \~**R**) and (~**P** or **S**)" looks like this:
 
-**P** | **Q** | **R** | **S** | ((**P** and **Q**) or ~**R**) and (~**P** or **S**)
+**P** | **Q** | **R** | **S** | ((**P** and **Q**) or \~**R**) and (~**P** or **S**)
 ---|---|---|---|---
 1 | 1 | 1 | 1 | 1
 1 | 1 | 1 | 0 | 0
@@ -84,7 +84,7 @@ The truth table for a statement with n predicates has 2^n rows, corresponding to
 
 The truth values of the component predicates are organized in a fixed way by convention, and so we can uniquely associate to each statement a sequence of 2^n 0s and 1s. 
 
-In the large table above, we would associate the sequence `1010101011111111` to the statement "((**P** and **Q**) or ~**R**) and (~**P** or **S**)"
+In the large table above, we would associate the sequence `1010101011111111` to the statement "((**P** and **Q**) or \~**R**) and (~**P** or **S**)"
 
 
 <a id="generating-statements-with-desired-truth-tables"></a>
@@ -103,7 +103,7 @@ We include two different ways of doing this: `mike_generator` and `ivan_generato
 
 The key idea here is that if we're working with n predicates, there are certain "atomic" statements that are true for exactly one combination of truth values of the predicates, and false for all others. Specifically, these are "and" statements involving all of the predicates. 
 
-For example if we're working with three predicates and want a statement that's true exactly when **P** is true, **Q** is true, and **R** is false, we simply conjoin them with ands as follows: "**P** and **Q** and ~**R**". This statement is true exactly under the desired three conditions, and false otherwise. 
+For example if we're working with three predicates and want a statement that's true exactly when **P** is true, **Q** is true, and **R** is false, we simply conjoin them with ands as follows: "**P** and **Q** and \~**R**". This statement is true exactly under the desired three conditions, and false otherwise. 
 
 Knowing this, and given a desired truth table column, do this:
 
@@ -131,13 +131,13 @@ Since there are eight characters, we know that we need a three-predicate stateme
 
 From this we can see the three rows corresponding to 1s in the desired column, and build the corresponding atomic statements (from top to bottom):
 
-- **P** and ~**Q** and **R**
-- ~**P** and **Q** and **R**
-- **P** and ~**Q** and ~**R**
+- **P** and \~**Q** and **R**
+- \~**P** and **Q** and **R**
+- **P** and \~**Q** and \~**R**
 
 Therefore, we let **X** be the disjunction of these: 
 
-> **X** = (**P** and ~**Q** and **R**) or (~**P** and **Q** and **R**) or (**P** and ~**Q** and ~**R**)
+> **X** = (**P** and \~**Q** and **R**) or (~**P** and **Q** and **R**) or (**P** and \~**Q** and \~**R**)
 
 
 <a id="ivan_generator"></a>
@@ -207,12 +207,12 @@ The problem of finding **Y** reduces to the problem of finding two one-predicate
 
 The base case takes care of these two simple problems:
 
-> **Y1** = **R** and ~**R**  
+> **Y1** = **R** and \~**R**  
 > **Y2** = **R**
 
 Therefore, the following statement has the desired truth table column for **Y**
 
-> **Y** = (**Q** and (**R** and ~**R**)) or (~**Q** and **R**)
+> **Y** = (**Q** and (**R** and \~**R**)) or (~**Q** and **R**)
 
 Similarly, the problem of finding **Z** reduces to the problem of finding one-predicate statements **Z1** and **Z2** with the following two truth tables:
 
@@ -228,12 +228,12 @@ Similarly, the problem of finding **Z** reduces to the problem of finding one-pr
 
 Again, the base case takes care of these:
 
-> **Z1** = **R** or ~**R**  
-> **Z2** = **R** and ~**R**
+> **Z1** = **R** or \~**R**  
+> **Z2** = **R** and \~**R**
 
 Therefore, the following statement has the desired truth table column for **Z**
 
-> **Z** = (**Q** and (**R** or ~**R**)) or (~**Q** and (**R** and ~**R**))
+> **Z** = (**Q** and (**R** or \~**R**)) or (~**Q** and (**R** and \~**R**))
 
 Finally, knowing **Y** and **Z**, we can give an answer for a statement **X** with the desired truth table column:
 
@@ -241,7 +241,7 @@ Finally, knowing **Y** and **Z**, we can give an answer for a statement **X** wi
 
 or fully written out:
 
-> **X** = (**P** and ((**Q** and (**R** and ~**R**)) or (~**Q** and **R**))) or (~**P** and ((**Q** and (**R** or ~**R**)) or (~**Q** and (**R** and ~**R**))))
+> **X** = (**P** and ((**Q** and (**R** and \~**R**)) or (~**Q** and **R**))) or (~**P** and ((**Q** and (**R** or \~**R**)) or (~**Q** and (**R** and \~**R**))))
 
 
 <a id="reducer"></a>
@@ -249,7 +249,7 @@ or fully written out:
 
 A logical statement that is always true, regardless of the truth values of its predicates, is called a *tautuology*. One that is always false is called a *contradiction*. 
 
-For example, while working through the `ivan_generator` example above, we used both of these. For example, we used the contradiction "**R** and ~**R**" to as a statement with a truth table column of all 0s, and "**R** or ~**R**" as a statement with a truth table column of all 1s. 
+For example, while working through the `ivan_generator` example above, we used both of these. For example, we used the contradiction "**R** and \~**R**" to as a statement with a truth table column of all 0s, and "**R** or \~**R**" as a statement with a truth table column of all 1s. 
 
 The presence of these tautologies can allow us to simplify logical statements. For example, if **X** is a tautological statement and **P** is a predicate, then The statement "**X** and **P**" is true if and only if **P** is true. 
 
@@ -262,14 +262,14 @@ Tautologies and contradictions can appear in "and" and "or" statements, giving f
 
 These simplifications allow us to reduce some complicated-looking logical statements into simpler, equivalent statements. Note that this process might require more than one "pass". For example, consider the statement
 
-> **P** and (**Q** or (**R** or ~**R**))
+> **P** and (**Q** or (**R** or \~**R**))
 
-In the innermost pair of brackets we see the tautology "**R** or ~**R**". The "or" statement "**Q** or (**R** or ~**R**)" that it's a part of is therefore a tautology itself, and in turn the entire statement is simply equivalent to **P**.
+In the innermost pair of brackets we see the tautology "**R** or \~**R**". The "or" statement "**Q** or (**R** or \~**R**)" that it's a part of is therefore a tautology itself, and in turn the entire statement is simply equivalent to **P**.
 
 The `reducer()` function performs these simplifications as much as it can.
 
 ```python
->>> X = 'P and (Q or (R or ~R))'
+>>> X = 'P and (Q or (R or \~R))'
 >>> print(reducer(X))
 'P'
 ```
@@ -279,7 +279,7 @@ For example, the very long statement **X** at the end of the example of `ivan_ge
 
 
 ```python
->>> X = '(P and ((Q and (R and ~R)) or (~Q and R))) or (~P and ((Q and (R or ~R)) or (~Q and (R and ~R))))'
+>>> X = '(P and ((Q and (R and \~R)) or (~Q and R))) or (~P and ((Q and (R or \~R)) or (~Q and (R and \~R))))'
 >>> print(reducer(X))
 '((P and (~Q and R)) or (~P and Q))'
 ```
