@@ -16,7 +16,7 @@ Generate a logical statement with a given number of predicates with a given trut
 <!-- /MarkdownTOC -->
 
 <a id="what-is-a-truth-table"></a>
-### What is a truth table?
+## What is a truth table?
 
 Given some logical predicates **P** and **Q**, and some logical statement involving them along with "and", "or", negations, and parentheses, the statement will have different truth values depending on the truth values of the predicates. 
 
@@ -74,7 +74,7 @@ For example, a truth table for the four-predicate statement "((**P** and **Q**) 
 0 | 0 | 0 | 0 | 1
 
 <a id="tldr"></a>
-#### TLDR
+### TLDR
 
 The truth table for a statement with n predicates has 2^n rows, corresponding to all the possible combinations of truth values of the predicates.
 
@@ -84,7 +84,7 @@ In the large table above, we would associate the sequence `1010101011111111` to 
 
 
 <a id="generating-statements-with-desired-truth-tables"></a>
-### Generating statements with desired truth tables
+## Generating statements with desired truth tables
 
 As explained above, to every statement with n predicates we can uniquely associate a string of 2^n 0s and 1s, representing the last column of its truth table.
 
@@ -95,7 +95,7 @@ The purpose of this code is to take in a desired truth table column as input, an
 We include two different ways of doing this: `mike_generator` and `ivan_generator`, explained below. It also includes a function for simplifying logical statements, also explained below. 
 
 <a id="mike_generator"></a>
-#### `mike_generator()`
+### `mike_generator()`
 
 The key idea here is that if we're working with n predicates, there are certain "atomic" statements that are true for exactly one combination of truth values of the predicates, and false for all others. Specifically, these are "and" statements involving all of the predicates. 
 
@@ -108,7 +108,7 @@ Knowing this, and given a desired truth table column, do this:
 - "or" them all together to make a statement with the desired column. 
 
 <a id="example"></a>
-##### Example
+#### Example
 
 Suppose we want a statement for the column `00101100`. 
 
@@ -137,7 +137,7 @@ Therefore, we let **X** be the disjunction of these:
 
 
 <a id="ivan_generator"></a>
-#### `ivan_generator()`
+### `ivan_generator()`
 
 This function works recursively, reducing the number of predicates in the statement at each iteration. 
 
@@ -169,7 +169,7 @@ Similarly, suppose we could find a statement **Z**, also involving only **Q** an
 In the particular case of a three-predicate statement, **Y** and **Z** would be two-predicate statements, and so the function would call itself and reduce these two questions to four questions about one-predicate statements, hitting the base case. 
 
 <a id="example-1"></a>
-##### Example
+#### Example
 
 Suppose as in the earlier example that we want a statement **X** for the column `00101100`. 
 
@@ -241,7 +241,7 @@ or fully written out:
 
 
 <a id="reducer"></a>
-### `reducer()`
+## `reducer()`
 
 A logical statement that is always true, regardless of the truth values of its predicates, is called a *tautuology*. One that is always false is called a *contradiction*. 
 
