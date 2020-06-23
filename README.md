@@ -2,6 +2,10 @@
 
 Generate a logical statement with a given number of predicates with a given truth table column.
 
+This code was written as a solution to a problem in MAT102, a course I TAed at the University of Toronto Mississauga, taught by [Mike Pawliuk](https://github.com/mpawliuk) and Qun Wang. It is overkill for that purpose, but I wanted to make it nice. The function that's named after Mike was his idea, but all code is mine. 
+
+***
+
 <!-- MarkdownTOC -->
 
 - [What is a truth table?](#what-is-a-truth-table)
