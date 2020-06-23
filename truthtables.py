@@ -205,6 +205,5 @@ def main():
 		print("Mike's statement:", mike_generator(column))
 		if i > limit:
 			break
-
 if __name__ == '__main__':
 	main()
